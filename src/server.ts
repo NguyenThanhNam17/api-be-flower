@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import router from "./routers";
+import cors from "cors";
+
 
 dotenv.config();
 
@@ -20,6 +22,14 @@ try {
 } catch (err) {
   console.log("Failed to connect to MongoDB", err);
 }
+
+
+app.use(
+  cors({
+    origin: "*", // tạm thời cho tất cả
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
